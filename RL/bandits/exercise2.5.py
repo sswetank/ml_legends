@@ -23,31 +23,35 @@ def simple_avg_non_stationary_bandit():
 	# Loop forever (By forever means very long term say 20k times)
 	counter = 0
 	prob_ctr = 0
-	while counter < 20000:
+	while counter < 50000:
 		rewards = {}
 		counter += 1
 		prob_ctr += 1
 		for i in range(1, 11):
 			rewards[i] = calc_reward()
 
-		if prob_ctr< 10:
+		if prob_ctr < 10:
 			# Exploitation
 			# Get the best action
-			action, max_rewards = sorted(rewards.items(), key= lambda kv:(kv[1],kv[0]))[-1]
+			action, max_rewards = sorted(rewards.items(), key=lambda kv: (kv[1], kv[0]))[-1]
 			# Update the mean reward using avg. method
 		else:
 			# Exploration
-			action = np.random.randint(1,11)
+			action = np.random.randint(1, 11)
 			max_rewards = rewards[action]
 			prob_ctr = 0
 		mean_reward[action].append(mean_reward[action][-1] +
 								   alpha*(max_rewards-mean_reward[action][-1]))
+	print([(key,len(mean_reward[key]),sum(mean_reward[key])) for key in mean_reward.keys()])
 	return mean_reward
 	# Update the average rewards for each action
 
 
 def plot(reward_action):
-	plt.plot()
+
+	x=range(len(reward_action))
+	plt.plot(x, reward_action)
+	plt.show()
 
 
 if __name__ == '__main__':
@@ -61,4 +65,5 @@ if __name__ == '__main__':
 	# plot(reward_action[best_action])
 	print(max_reward)
 	print(best_action)
-	print(reward_action)
+	print(len(reward_action[best_action]))
+	plot(reward_action[best_action])

@@ -31,7 +31,7 @@ def simple_avg_non_stationary_bandit(counter_max, prob_ctr_thres):
 		for i in range(1, 11):
 			rewards[i] = calc_reward()
 
-		if prob_ctr < prob_ctr_thres:
+		if prob_ctr <= prob_ctr_thres:
 			# Exploitation
 			# Get the best action
 			action, max_rewards = sorted(rewards.items(), key=lambda kv: (kv[1], kv[0]))[-1]
@@ -66,9 +66,10 @@ def get_max_reward(reward_action):
 
 
 if __name__ == '__main__':
-	reward_action = simple_avg_non_stationary_bandit(10000, 2)
-	reward_action1 = simple_avg_non_stationary_bandit(10000, 10)
-	reward_action2 = simple_avg_non_stationary_bandit(10000, 1000)
+	reward_action = simple_avg_non_stationary_bandit(2000, 0)
+	reward_action1 = simple_avg_non_stationary_bandit(2000, 2)
+	reward_action2 = simple_avg_non_stationary_bandit(2000, 10)
+	reward_action3 = simple_avg_non_stationary_bandit(2000, 100)
 	# best_action = 0
 	# max_reward=0
 	# for k in reward_action.keys():
@@ -79,7 +80,8 @@ if __name__ == '__main__':
 	best_action, max_reward = get_max_reward(reward_action)
 	best_action1, max_reward1 = get_max_reward(reward_action1)
 	best_action2, max_reward2 = get_max_reward(reward_action2)
-	print(max_reward,max_reward1, max_reward2)
-	print(best_action, best_action1, best_action2)
-	print(len(reward_action[best_action]))
-	plot([reward_action[best_action],reward_action1[best_action1], reward_action2[best_action2]])
+	best_action3, max_reward3 = get_max_reward(reward_action3)
+	print(max_reward,max_reward1, max_reward2,max_reward3)
+	print(best_action, best_action1, best_action2, best_action3)
+	plot([reward_action[best_action],reward_action1[best_action1],
+		  reward_action2[best_action2], reward_action3[best_action3]])

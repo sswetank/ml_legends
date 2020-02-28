@@ -10,7 +10,7 @@ def calc_reward():
 	return np.random.normal(0, 1)
 
 
-def simple_avg_non_stationary_bandit(alpha, counter_max, prob_ctr_thres):
+def simple_avg_non_stationary_bandit(init_reward,alpha, counter_max, prob_ctr_thres):
 	# k actions Lets assume k=10
 	k = 10
 	# Initialize the value for all the k actions as 0
@@ -19,7 +19,7 @@ def simple_avg_non_stationary_bandit(alpha, counter_max, prob_ctr_thres):
 	# 	reward_action[1] = []
 	mean_reward = {}
 	for i in range(1, 11):
-		mean_reward[i] = [0]
+		mean_reward[i] = [init_reward]
 	# Loop forever (By forever means very long term say 20k times)
 	counter = 0
 	prob_ctr = 0
@@ -65,11 +65,11 @@ def get_max_reward(reward_action):
 
 
 if __name__ == '__main__':
-	reward_action = simple_avg_non_stationary_bandit(0.005, 50000, 0)
-	reward_action1 = simple_avg_non_stationary_bandit(0.005, 50000, 2)
-	reward_action2 = simple_avg_non_stationary_bandit(0.005, 50000, 10)
-	reward_action3 = simple_avg_non_stationary_bandit(0.005, 50000, 100)
-	reward_action4 = simple_avg_non_stationary_bandit(0.005, 50000, 1000)
+	reward_action = simple_avg_non_stationary_bandit(0, 0.005, 50000, 0)
+	reward_action1 = simple_avg_non_stationary_bandit(0, 0.005, 50000, 2)
+	reward_action2 = simple_avg_non_stationary_bandit(0, 0.005, 50000, 10)
+	reward_action3 = simple_avg_non_stationary_bandit(2,0.005, 50000, 100)
+	reward_action4 = simple_avg_non_stationary_bandit(2, 0.005, 50000, 1000)
 
 	best_action, max_reward = get_max_reward(reward_action)
 	best_action1, max_reward1 = get_max_reward(reward_action1)

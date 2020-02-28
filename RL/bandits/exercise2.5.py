@@ -6,7 +6,8 @@ import matplotlib.pyplot as plt
 
 # Adding non-stationary rewards
 def calc_reward():
-	return np.random.normal(0,0.01)
+	# np.random.RandomState(1234)
+	return np.random.normal(0, 0.01)
 
 
 def simple_avg_non_stationary_bandit():
@@ -16,21 +17,21 @@ def simple_avg_non_stationary_bandit():
 	# reward_action = {}
 	# for i in range(1, 11):
 	# 	reward_action[1] = []
-	mean_reward={}
-	for i in range(1,11):
-		mean_reward[i]=[0]
+	mean_reward = {}
+	for i in range(1, 11):
+		mean_reward[i] = [0]
 	alpha=0.2
 	# Loop forever (By forever means very long term say 20k times)
 	counter = 0
 	prob_ctr = 0
-	while counter < 50000:
+	while counter < 5000:
 		rewards = {}
 		counter += 1
 		prob_ctr += 1
 		for i in range(1, 11):
 			rewards[i] = calc_reward()
 
-		if prob_ctr < 10:
+		if prob_ctr < 100:
 			# Exploitation
 			# Get the best action
 			action, max_rewards = sorted(rewards.items(), key=lambda kv: (kv[1], kv[0]))[-1]

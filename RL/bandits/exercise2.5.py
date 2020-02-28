@@ -69,12 +69,15 @@ if __name__ == '__main__':
 	reward_action1 = simple_avg_non_stationary_bandit(0.005, 50000, 2)
 	reward_action2 = simple_avg_non_stationary_bandit(0.005, 50000, 10)
 	reward_action3 = simple_avg_non_stationary_bandit(0.005, 50000, 100)
+	reward_action4 = simple_avg_non_stationary_bandit(0.005, 50000, 1000)
 
 	best_action, max_reward = get_max_reward(reward_action)
 	best_action1, max_reward1 = get_max_reward(reward_action1)
 	best_action2, max_reward2 = get_max_reward(reward_action2)
 	best_action3, max_reward3 = get_max_reward(reward_action3)
-	print(max_reward,max_reward1, max_reward2,max_reward3)
-	print(best_action, best_action1, best_action2, best_action3)
+	best_action4, max_reward4 = get_max_reward(reward_action4)
+	print(max_reward,max_reward1, max_reward2,max_reward3, max_reward4)
+	print(best_action, best_action1, best_action2, best_action3, best_action4)
 	plot([reward_action[best_action],reward_action1[best_action1],
-		  reward_action2[best_action2], reward_action3[best_action3]])
+		  reward_action2[best_action2], reward_action3[best_action3],
+		  reward_action4[best_action4]])

@@ -40,11 +40,11 @@ def simple_avg_non_stationary_bandit(alpha, counter_max, prob_ctr_thres):
 			action = np.random.randint(1, 11)
 			max_rewards = rewards[action]
 			prob_ctr = 0
+		# Update the average rewards for each action
 		mean_reward[action].append(mean_reward[action][-1] +
 								   alpha*(max_rewards-mean_reward[action][-1]))
 	print([(key,len(mean_reward[key]),sum(mean_reward[key])) for key in mean_reward.keys()])
 	return mean_reward
-	# Update the average rewards for each action
 
 
 def plot(reward_actions):
@@ -69,13 +69,7 @@ if __name__ == '__main__':
 	reward_action1 = simple_avg_non_stationary_bandit(0.005, 50000, 2)
 	reward_action2 = simple_avg_non_stationary_bandit(0.005, 50000, 10)
 	reward_action3 = simple_avg_non_stationary_bandit(0.005, 50000, 100)
-	# best_action = 0
-	# max_reward=0
-	# for k in reward_action.keys():
-	# 	if sum(reward_action[k]) > max_reward:
-	# 		best_action = k
-	# 		max_reward = sum(reward_action[k])
-	# plot(reward_action[best_action])
+
 	best_action, max_reward = get_max_reward(reward_action)
 	best_action1, max_reward1 = get_max_reward(reward_action1)
 	best_action2, max_reward2 = get_max_reward(reward_action2)
